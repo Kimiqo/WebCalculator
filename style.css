@@ -1,5 +1,6 @@
 body {
-    background-color: cadetblue;
+    background-color: black;
+    color: white;
     display: flex;
     flex-direction: column;
     /* text-align: center; */
@@ -10,6 +11,7 @@ body {
     height: 480px;
     width: 340px;
     border-radius: 5%;
+    border: 5px solid aqua;
     text-align: center;
     padding: 20px;
 }
@@ -20,6 +22,7 @@ body {
     background-color: white;
     font-size: 24px;
     border-color: white;
+    text-align: right;
 }
 
 button{
