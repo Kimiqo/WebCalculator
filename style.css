@@ -1,0 +1,36 @@
+body {
+    background-color: cadetblue;
+    display: flex;
+    flex-direction: column;
+    /* text-align: center; */
+}
+
+.calculator{
+    background-color: black;
+    height: 480px;
+    width: 360px;
+    border-radius: 20%;
+    text-align: center;
+    padding: 20px;
+}
+
+#display{
+    height: 60px;
+    width: 300px;
+    background-color: white;
+}
+
+button{
+    height: 70px;
+    width: 70px;
+    margin: 3px;
+    font-size: 20px;
+    border-radius: 70%;
+    border-color: red;
+}
+
+
+button#num0{
+    width: 150px;
+    border-radius: 30%;
+}
