@@ -8,29 +8,40 @@ body {
 .calculator{
     background-color: black;
     height: 480px;
-    width: 360px;
-    border-radius: 20%;
+    width: 340px;
+    border-radius: 5%;
     text-align: center;
     padding: 20px;
 }
 
 #display{
-    height: 60px;
+    height: 50px;
     width: 300px;
     background-color: white;
+    font-size: 24px;
+    border-color: white;
 }
 
 button{
+    background-color: black;
+    color: white;
     height: 70px;
     width: 70px;
     margin: 3px;
-    font-size: 20px;
+    font-size: 23px;
     border-radius: 70%;
     border-color: red;
 }
 
-
 button#num0{
     width: 150px;
-    border-radius: 30%;
+    border-radius:20%;
+}
+
+#divide,
+#multiply,
+#plus,
+#minus,
+#equal{
+    border-color: green;
 }
