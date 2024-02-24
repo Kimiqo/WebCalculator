@@ -1,22 +1,11 @@
 //variables for buttons 
 //numbers
 
-// const numButtons = {};
-// for (let i=0; i<=9; i++){
-//     numButtons[`num${i}`] = document.getElementById(`num${i}`);
-// }
-// console.log(numButtons);
-
-const num0 = document.getElementById("num0");
-const num1 = document.getElementById("num1");
-const num2 = document.getElementById("num2");
-const num3 = document.getElementById("num3");
-const num4 = document.getElementById("num4");
-const num5 = document.getElementById("num5");
-const num6 = document.getElementById("num6");
-const num7 = document.getElementById("num7");
-const num8 = document.getElementById("num8");
-const num9 = document.getElementById("num9");
+const numButtons = {};
+for (let i=0; i<=9; i++){
+    numButtons[`num${i}`] = document.getElementById(`num${i}`);
+}
+console.log(numButtons);
 
 //display 
 const display = document.getElementById("display");
@@ -28,6 +17,8 @@ const divide = document.getElementById("divide");
 const multiply = document.getElementById("multiply");
 const minus = document.getElementById("minus");
 const equal = document.getElementById("equal");
+const decimal = document.getElementById("decimal");
+const percent = document.getElementById("percent");
 const clear = document.getElementById("clear");
 
 
@@ -41,55 +32,96 @@ function displayNum(value){ //append value to display
 
 function calcEqual(operT, displayString){
     let total = 0;
+    //splitting display content with operator as splitter
     let splitArr  = displayString.split(operT).map(Number);
-    let numb1 = splitArr[0];
-    let numb2 = splitArr[1];
-    if(operator === "+"){
+    let numb1 = splitArr[0]; //first num
+    let numb2 = splitArr[1]; //second num
+    
+    //operator calculations
+    if(operT === "+"){
         total = numb1 + numb2;
-    }else if(operator === "-"){
+    }else if(operT === "-"){
         total = numb1 - numb2;
-    }else if(operator === "x"){
+    }else if(operT === "x"){
         total = numb1 * numb2;
-    }else if(operator === "/"){
+    }else if(operT === "/"){
         total = numb1 / numb2;
-    }else{
-        total = "error";
+    }else if(operT === "%"){
+        total = numb1/100;
     }
-    display.value = total;
+
+    //checking for Infinity
+    if (total === Infinity || total === NaN){
+        display.value = "ERROR";
+        setTimeout(() => {
+            display.value = "";  
+        },1000);
+          
+    }else {
+        display.value = total;
+    }
+    
 }
 
 //numbers to screen
-num0.addEventListener("click", () => {displayNum(num0)});
-num1.addEventListener("click", () => {displayNum(num1)});
-num2.addEventListener("click", () => {displayNum(num2)});
-num3.addEventListener("click", () => {displayNum(num3)});
-num4.addEventListener("click", () => {displayNum(num4)});
-num5.addEventListener("click", () => {displayNum(num5)});
-num6.addEventListener("click", () => {displayNum(num6)});
-num7.addEventListener("click", () => {displayNum(num7)});
-num8.addEventListener("click", () => {displayNum(num8)});
-num9.addEventListener("click", () => {displayNum(num9)});
+//shortened eventListener implementation
+document.addEventListener("click", (event) => {
+    const clickedElement = event.target;
+
+    if (clickedElement.id && clickedElement.id.startsWith("num")) {
+        displayNum(clickedElement);
+    }
+});
+
 
 //symbols
 let operator = "";
 plus.addEventListener("click", () => {
     displayNum(plus);
+    minus.disabled = true;
+    divide.disabled = true;
+    multiply.disabled = true;
+    percent.disabled = true;
     operator = "+";
 });
 minus.addEventListener("click", () => {
     displayNum(minus);
+    plus.disabled = true;
+    divide.disabled = true;
+    multiply.disabled = true;
+    percent.disabled = true;
     operator = "-";
 });
 divide.addEventListener("click", () => {
     displayNum(divide);
+    minus.disabled = true;
+    plus.disabled = true;
+    multiply.disabled = true;
+    percent.disabled = true;
     operator = "/";
 });
 multiply.addEventListener("click", () => {
     displayNum(multiply);
+    minus.disabled = true;
+    divide.disabled = true;
+    plus.disabled = true;
+    percent.disabled = true;
     operator = "x";
 });
 equal.addEventListener("click", () => {
-    calcEqual(operator,display.value)
+    calcEqual(operator,display.value);
+    minus.disabled = false;
+    divide.disabled = false;
+    multiply.disabled = false;
+    plus.disabled = false;
+    percent.disabled = false;
+});
+decimal.addEventListener("click", () => {
+    display.value += "."
+});
+percent.addEventListener('click', () => {
+    displayNum(percent);
+    operator = "%";
 });
 
 
